@@ -11,16 +11,23 @@
   </head>
 
   <body>
-    <div class="container mt-4">
-      <% if notice %>
-        <div class="alert alert-success"><%= notice %></div>
-      <% end %>
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
 
-      <% if alert %>
-        <div class="alert alert-danger"><%= alert %></div>
-      <% end %>
+        <% if notice %>
+          <div class="alert alert-success"><%= notice %></div>
+        <% end %>
 
-      <%= yield %>
+        <% if alert %>
+          <div class="alert alert-danger"><%= alert %></div>
+        <% end %>
+
+        <%= yield %>
+
+      </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

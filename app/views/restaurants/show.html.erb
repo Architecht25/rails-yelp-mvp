@@ -1,20 +1,45 @@
-<h1>Please hava a look at the restaurant selected</h1>
+<h1>Inside the restaurant... 🏪</h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
-</p>
-<p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
-</p>
-<p>
-  <strong>Category:</strong>
-  <%= @restaurant.category %>
-</p>
-<p>
-  <strong>Phone:</strong>
-  <%= @restaurant.phone_number %>
-</p>
+<p><strong>Name:</strong> <%= @restaurant.name %></p>
+<p><strong>Address:</strong> <%= @restaurant.address %></p>
+<p><strong>Category:</strong> <%= @restaurant.category %></p>
+<p><strong>Phone:</strong> <%= @restaurant.phone_number %></p>
 
-<%= link_to "back to the main list", restaurants_path, class: "btn btn-primary" %>
+<%= link_to "Back to the main list", restaurants_path, class: "btn btn-primary mt-3" %>
+
+<hr>
+
+<h2>Reviews for <%= @restaurant.name %></h2>
+
+<% if @restaurant.reviews.any? %>
+  <ul>
+    <% @restaurant.reviews.each do |review| %>
+      <li>
+        <strong><%= review.rating %> ⭐</strong> - <%= review.content %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No reviews yet. Be the first to leave one!</p>
+<% end %>
+
+<hr>
+
+<h2>Leave a review</h2>
+
+<%# Affiche les erreurs si elles existent %>
+<% if defined?(@review) && @review.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% @review.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= simple_form_for [@restaurant, @review || Review.new] do |f| %>
+  <%= f.input :rating, collection: 0..5, prompt: "Choose a rating" %>
+  <%= f.input :content %>
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>

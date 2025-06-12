@@ -5,7 +5,7 @@
   <%= f.input :address %>
   <%= f.input :category, collection: ["chinese", "italian", "japanese", "french", "belgian"] %>
   <%= f.input :phone_number %>
-  <%= f.button :submit %>
+  <%= f.button :submit, class: "btn btn-success" %>
 <%end%>
 
-<%= link_to "Back to the main list", restaurants_path, class: "btn btn-primary" %>
+<%= link_to "Back to the main list", restaurants_path, class: "btn btn-primary mt-3" %>
